@@ -1,0 +1,11 @@
+{
+  "name": "trucking",
+  "version": "1.0.0",
+  "description": "A trucking app to automate the complete traportaion process",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
