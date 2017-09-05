@@ -7,38 +7,40 @@ var User = require('../schemas/userSchema');
 var admin = {
 
 
-  extractCustomerDetails: function(customer_id,cb){
+  extractCustomerDetails: function(data,cb){
     
-    
-    Customer.find().limit(20).exec(function(err, result){
-      console.log(err,result)
+    // {_id: 59aea296cc09df34787146ee}
+
+    //var c_id= {};
+
+    Customer.find({}).limit(100).exec(function(err, result){
+
       if(err){
-
-        //return res.json({code:500, message: "Internal server error."})
+        console.log("Error:", err);
       }else{
-
-        return cb(result);
+        console.log(result)
+        return cb(null,result);
         //return res.json({code:200, data:result})
       }
     })
   },
   
-createNewCustomer: function(customer_id,cb){
-    var json = {name:"abhsiehk",country:"india",city:"fbd",address:"4 marla",industry:"it",tax_id:"21222",postal_code:"dhbdh",icon:"dhdh",description:"dvgdvdh",telephone1:"262672",telephone2:"djbjdj"};
-    var customer = new Customer(json)
-    customer.save(function(err, result){
-      console.log("date---- ", result)
-      var json = {username:"abh",customer_id:result._id};
-      var user = new User(json)
-      user.save(function(err, result){
-        console.log("date---- ", err,result)
-        
+  createNewCustomer: function(customer_id,cb){
+      var json = {name:"abhsiehk",country:"india",city:"fbd",address:"4 marla",industry:"it",tax_id:"21222",postal_code:"dhbdh",icon:"dhdh",description:"dvgdvdh",telephone1:"262672",telephone2:"djbjdj"};
+      var customer = new Customer(json)
+      customer.save(function(err, result){
+        console.log("date---- ", result)
+        var json = {username:"abh",customer_id:result._id};
+        var user = new User(json)
+        user.save(function(err, result){
+          console.log("date---- ", err,result)
+          
+          //return cb(result);
+        })
         //return cb(result);
       })
-      //return cb(result);
-    })
-    
-  }
+      
+    }
   
 
 
