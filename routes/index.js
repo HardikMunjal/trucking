@@ -22,8 +22,10 @@ module.exports = function (app) {
   // app.delete('/trk/service/:service_id', serCtlr.deleteUser);
 
     //**************** CUSTOMER BASED API
-     app.get('/trk/customer', cstmrCtlr.fetchCustomer);
-     app.get('/trk/service', cstmrCtlr.createNewCustomer);
+     app.get('/trk/customer', cstmrCtlr.fetchAllCustomer);
+     app.get('/trk/customer/:customer_id', cstmrCtlr.fetchCustomer);
+     app.post('/trk/customer', cstmrCtlr.createNewCustomer);
+     app.post('/trk/customer/:customer_id', cstmrCtlr.updateCustomer);
   // app.put('/trk/service', serCtlr.createUser);
   // app.delete('/trk/service/:service_id', serCtlr.deleteUser);
 

@@ -1,35 +1,72 @@
 var cstmrModel = require('../models/customerModel');
 
 var customer = {
+
+  fetchAllCustomer: function(req, res, next) {
+   
+    var data = {};
+    data.limit=100;
+    cstmrModel.fetchAllCustomer(data,function(err, result){
+    	console.log('resrsrsr',result)
+         return res.json(result)
+      })
+  },
+
   fetchCustomer: function(req, res, next) {
    
-   
-    var data= {};
-    		
-    if(req.query.customer_id){
-       data.customer_id=req.query.customer_id;
-    }
+    var data = {};
+    data.customer_id = req.params.customer_id ? req.params.customer_id : null;
 
-    cstmrModel.extractCustomerDetails(data,function(err, result){
-    	console.log('resrsrsr',result)
+    cstmrModel.fetchCustomer(data,function(err, result){
+      console.log('customer response',result)
          return res.json(result)
       })
 
   },
   createNewCustomer: function(req, res, next) {
    
+    var data = {};
     var customer_id= true;   
-    if(req.query.users && req.query.users.constructor === Array){
+    if(req.body.contacts && req.body.contacts.constructor === Array){
        //check user structure is correct or not
-       data.users=[];
-    } 
-    if(req.query.customer_id){
-       customer_id=req.query.customer_id;
+       req.body.contacts.forEach(function(contact, index) {
+        if(!contact.username || !contact.type || !contact.department){
+          return res.json('Mandatory parameters are missing in Contacts')
+        }
+      });
+      data.users=req.body.contacts;
+
     }
-    cstmrModel.createNewCustomer(customer_id,function(err, result){
-    	console.log(result)
-         //return cb(err,result);
-      })
+
+
+    if(!req.body.name || !req.body.country || !req.body.city || !req.body.address || !req.body.active || !req.body.tax_id || !req.body.postal_code || !req.body.industry || !req.body.telephone1){
+      
+      return res.json("Mandatory parameters are missing")
+    }
+
+    data.customer = req.body;
+    
+    cstmrModel.createNewCustomer(data,function(err, result){
+      if(result){
+        console.log(result)
+        return res.json("user added successfully");
+      }
+    	
+    })
+
+  },
+
+  updateCustomer: function(req, res, next) {
+      
+   var data={};
+   data.customer_id=req.params.customer_id;
+   data.customer=req.body;
+    cstmrModel.updateCustomer(data,function(err, result){
+      if(result){
+        console.log(result)
+         return res.json("user updated successfully");
+      }
+    })
 
   }
 }

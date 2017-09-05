@@ -7,56 +7,88 @@ var User = require('../schemas/userSchema');
 var admin = {
 
 
-  extractCustomerDetails: function(data,cb){
+  fetchAllCustomer: function(data,cb){
     
-    // {_id: 59aea296cc09df34787146ee}
-
-    //var c_id= {};
-
-    Customer.find({}).limit(100).exec(function(err, result){
+     Customer.find({}).limit(data.limit).exec(function(err, result){
 
       if(err){
         console.log("Error:", err);
       }else{
         console.log(result)
         return cb(null,result);
+      }
+    })
+  },
+
+  fetchCustomer: function(data,cb){
+    
+    var customer=[];
+    Customer.find({_id:data.customer_id}).exec(function(err, result){
+
+      if(err){
+        console.log("Error:", err);
+      }else{
+        console.log(result)
+        customer=result;
+        User.find({customer_id:data.customer_id}).exec(function(err, result){
+
+         if(err){
+            console.log("Error:", err);
+          }else{
+            console.log('selected users',result)
+            //var bhalu = customer;
+            customer.contacts= result;
+            //bhalu[0].userggg=result;
+            
+            //console.log(bhalu[0].userggg)
+            return cb(null,customer);
+            //return res.json({code:200, data:result})
+          }
+        })
+        //return cb(null,result);
         //return res.json({code:200, data:result})
       }
     })
   },
   
-  createNewCustomer: function(customer_id,cb){
-      var json = {name:"abhsiehk",country:"india",city:"fbd",address:"4 marla",industry:"it",tax_id:"21222",postal_code:"dhbdh",icon:"dhdh",description:"dvgdvdh",telephone1:"262672",telephone2:"djbjdj"};
+  createNewCustomer: function(data,cb){
+      var json = data.customer;
       var customer = new Customer(json)
       customer.save(function(err, result){
-        console.log("date---- ", result)
-        var json = {username:"abh",customer_id:result._id};
-        var user = new User(json)
-        user.save(function(err, result){
-          console.log("date---- ", err,result)
-          
-          //return cb(result);
-        })
-        //return cb(result);
+        console.log("date---- ", result);
+
+        if(data.users){
+          data.users.forEach(function(user, index) {
+            user.customer_id=result.id;
+          });
+        
+          var user = new User(data.users[0])
+          user.save(function(err, result){
+            console.log("date---- ", err,result)
+              
+              return cb(null,result);
+          })
+        }
+
+        return cb(null,result);
       })
+   
+  },
+ 
+  updateCustomer: function(data,cb){
+      //var json = data.customer;
+      //var customer = new Customer(json)
+       Customer.update({_id: data.customer_id}, data.customer, function(err, result) {
+        console.log(err,result)
+        if (err) {
+          return cb(err);
+        }
+        return cb(null,result);
+      });
       
     }
-  
+  };
 
 
-}
 
-
-// function getDate(date, type) {
-//   var now = date? new Date(date) : new Date();
-//   if(type === "month"){
-//       return new Date(now.getFullYear(), now.getMonth(), 1);
-//     }
-//   now.setHours(0,0,0,0)
-//   var day = now.getDay(),
-//       diff = now.getDate() - day + (day == 0 ? -6:1); // adjust when day is sunday
-//   return new Date(now.setDate(diff));
-
-//   return monday;
-// }
 module.exports = admin;

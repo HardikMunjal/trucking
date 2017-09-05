@@ -1,15 +1,11 @@
-//userSchema
+//customerSchema
 'use strict'
 
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-// var customerSchema = new Schema({
-// 	name:{
-// 		type:String
-// 	}
-// });
+
 var customerSchema = new Schema({
 	name:{
 		type:String
@@ -23,6 +19,9 @@ var customerSchema = new Schema({
 	address:{
 		type:String
 	},
+	active:{
+        type: Boolean
+	},
 	industry:{
 		type:String,
 		default:null
@@ -32,7 +31,7 @@ var customerSchema = new Schema({
 		default:null
 	},
 	postal_code:{
-		type:String,
+		type:Number,
 		default:null
 	},
 	icon:{
@@ -44,15 +43,19 @@ var customerSchema = new Schema({
 		default:null
 	},
 	telephone1:{
-		type:String,
+		type:Number,
 		default:null
 	},
 	telephone2:{
-		type:String,
+		type:Number,
 		default:null
+	},
+	createdAt:{
+		type:Date,
+		default:Date.now
 	}
 });
 
-var customer = mongoose.model('susu', customerSchema);
+var customer = mongoose.model('customer', customerSchema);
 
 module.exports = customer;

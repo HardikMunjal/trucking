@@ -7,11 +7,17 @@ var Schema = mongoose.Schema;
 
 
 var userSchema = new Schema({
-	username:{
-		type:String,
-		default:'bhai'
+	customer_id:{
+        type: String,
+        default:''
+    },
+	type:{
+        type: String
 	},
-    customer_id:{
+	username:{
+		type:String
+	},
+    department:{
         type: String
     },
 	createdAt:{
@@ -20,6 +26,6 @@ var userSchema = new Schema({
 	}
 });
 
-var user = mongoose.model('useca', userSchema);
+var user = mongoose.model('user', userSchema);
 
 module.exports = user;
