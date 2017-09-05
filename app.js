@@ -9,7 +9,7 @@ const colors = require('colors');
 const cors_sec = require('./routes/corsheaders')
 const mongoose = require('mongoose');
 mongoose.Promise = Promise;
-mongoose.connect('mongodb://localhost/QlikDatabase');
+mongoose.connect('mongodb://localhost/trucking');
 
 const http = require('http').Server(app);
 

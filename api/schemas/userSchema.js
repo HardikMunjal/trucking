@@ -1,48 +1,25 @@
 //userSchema
 'use strict'
 
+
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var logschema = new Schema({
-	name:{
-		type:String
-	},
-	type:{
-		type:String
-	},
-	description:{
-		type:String
-	},
-	industry:{
-		type:String
-	},
-	RNC:{
+
+var userSchema = new Schema({
+	username:{
 		type:String,
-		default:null
+		default:'bhai'
 	},
-	application:{
-		type:String,
-		default:null
-	},
-	service_name:{
-		type:String,
-		default:null
-	},
-	local_ip:{
-		type:String,
-		default:null
-	},
-	server_ip:{
-		type:String,
-		default:null
-	},
+    customer_id:{
+        type: String
+    },
 	createdAt:{
 		type:Date,
 		default:Date.now
 	}
 });
 
-var logger = mongoose.model('Logger', logschema);
+var user = mongoose.model('useca', userSchema);
 
-module.exports = logger;
+module.exports = user;
