@@ -1,4 +1,4 @@
-var allowedHosts = ['http://0.0.0.0:4000','http://swift-dev.drakulaaz.co'];
+var allowedHosts = ['http://0.0.0.0:4000','http://swift-dev.drakulaaz.co','http://localhost:4200'];
 
 
                     
