@@ -4,7 +4,7 @@ var User = require('../schemas/userSchema');
 
 
 
-var admin = {
+var cModel = {
 
 
   fetchAllCustomer: function(data,cb){
@@ -12,7 +12,7 @@ var admin = {
      Customer.find({}).limit(data.limit).exec(function(err, result){
 
       if(err){
-        console.log("Error:", err);
+        return cb(err)
       }else{
         console.log(result)
         return cb(null,result);
@@ -23,30 +23,28 @@ var admin = {
   fetchCustomer: function(data,cb){
     
     var customer=[];
-    Customer.find({_id:data.customer_id}).exec(function(err, result){
+    Customer.find({_id:data.c_id}).exec(function(err, result){
 
       if(err){
         console.log("Error:", err);
+        return cb(err)
       }else{
         console.log(result)
-        customer=result;
-        User.find({customer_id:data.customer_id}).exec(function(err, result){
+        customer=result[0];
+        //delete customer['__v'];
+        User.find({customer_id:data.c_id}).exec(function(err, result){
 
          if(err){
             console.log("Error:", err);
+            return cb(err)
           }else{
-            console.log('selected users',result)
-            //var bhalu = customer;
-            customer.contacts= result;
-            //bhalu[0].userggg=result;
             
-            //console.log(bhalu[0].userggg)
-            return cb(null,customer);
-            //return res.json({code:200, data:result})
+            var extensibleCustomer = customer.toObject();
+            extensibleCustomer.contacts= result;
+            return cb(null,extensibleCustomer);
+          
           }
         })
-        //return cb(null,result);
-        //return res.json({code:200, data:result})
       }
     })
   },
@@ -55,30 +53,26 @@ var admin = {
       var json = data.customer;
       var customer = new Customer(json)
       customer.save(function(err, result){
-        console.log("date---- ", result);
 
         if(data.users){
           data.users.forEach(function(user, index) {
             user.customer_id=result.id;
           });
         
-          var user = new User(data.users[0])
+          var user = new User(data.users[0]);
           user.save(function(err, result){
-            console.log("date---- ", err,result)
-              
               return cb(null,result);
           })
-        }
 
-        return cb(null,result);
+        }else{
+            return cb(null,result);
+        }
       })
-   
-  },
+    },
  
   updateCustomer: function(data,cb){
-      //var json = data.customer;
-      //var customer = new Customer(json)
-       Customer.update({_id: data.customer_id}, data.customer, function(err, result) {
+      
+       Customer.update({_id: data.c_id}, data.customer, function(err, result) {
         console.log(err,result)
         if (err) {
           return cb(err);
@@ -91,4 +85,4 @@ var admin = {
 
 
 
-module.exports = admin;
+module.exports = cModel;

@@ -15,10 +15,9 @@ var customer = {
   fetchCustomer: function(req, res, next) {
    
     var data = {};
-    data.customer_id = req.params.customer_id ? req.params.customer_id : null;
+    data.c_id = req.params.customer_id ? req.params.customer_id : null;
 
     cstmrModel.fetchCustomer(data,function(err, result){
-      console.log('customer response',result)
          return res.json(result)
       })
 
@@ -26,7 +25,7 @@ var customer = {
   createNewCustomer: function(req, res, next) {
    
     var data = {};
-    var customer_id= true;   
+    var c_id= true;   
     if(req.body.contacts && req.body.contacts.constructor === Array){
        //check user structure is correct or not
        req.body.contacts.forEach(function(contact, index) {
@@ -35,15 +34,12 @@ var customer = {
         }
       });
       data.users=req.body.contacts;
-
     }
 
 
     if(!req.body.name || !req.body.country || !req.body.city || !req.body.address || !req.body.active || !req.body.tax_id || !req.body.postal_code || !req.body.industry || !req.body.telephone1){
-      
-      return res.json("Mandatory parameters are missing")
+       return res.json("Mandatory parameters are missing")
     }
-
     data.customer = req.body;
     
     cstmrModel.createNewCustomer(data,function(err, result){
@@ -51,15 +47,13 @@ var customer = {
         console.log(result)
         return res.json("user added successfully");
       }
-    	
     })
-
   },
 
   updateCustomer: function(req, res, next) {
       
    var data={};
-   data.customer_id=req.params.customer_id;
+   data.c_id = req.params.customer_id ? req.params.customer_id : null;
    data.customer=req.body;
     cstmrModel.updateCustomer(data,function(err, result){
       if(result){
