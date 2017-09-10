@@ -9,13 +9,22 @@ var cModel = {
 
   fetchAllCustomer: function(data,cb){
     
-     Customer.find({}).limit(data.limit).exec(function(err, result){
+     Customer.find({}).limit(data.limit).lean().exec(function(err, result){
 
       if(err){
         return cb(err)
       }else{
         console.log(result)
-        return cb(null,result);
+        var extensibleCustomer = result;
+    
+        extensibleCustomer.forEach(function(cus, index) {
+          cus.service_used=2;
+          cus.loads_delivered=230;
+          cus.loads_inprogress=7;
+          cus.rating=4;
+        });
+
+        return cb(null,extensibleCustomer);
       }
     })
   },
@@ -38,9 +47,16 @@ var cModel = {
             console.log("Error:", err);
             return cb(err)
           }else{
-            
+            if(!customer){
+              return cb("Not Found")
+            }
             var extensibleCustomer = customer.toObject();
             extensibleCustomer.contacts= result;
+
+            extensibleCustomer.service_used=2;
+            extensibleCustomer.loads_delivered=230;
+            extensibleCustomer.loads_inprogress=7;
+            extensibleCustomer.rating=4;
             return cb(null,extensibleCustomer);
           
           }
@@ -80,6 +96,16 @@ var cModel = {
         return cb(null,result);
       });
       
+    },
+
+   deleteCustomer: function(data,cb){
+      
+      Customer.findOneAndRemove({_id: data.c_id}, function(err, result) {
+        if (err) return cb(err);
+
+        // we have deleted the user
+        return cb(null,result);
+      });
     }
   };
 

@@ -26,6 +26,7 @@ module.exports = function (app) {
      app.get('/trk/customer/:customer_id', cstmrCtlr.fetchCustomer);
      app.post('/trk/customer', cstmrCtlr.createNewCustomer);
      app.post('/trk/customer/:customer_id', cstmrCtlr.updateCustomer);
+     app.delete('/trk/customer/:customer_id',cstmrCtlr.deleteCustomer);
   // app.put('/trk/service', serCtlr.createUser);
   // app.delete('/trk/service/:service_id', serCtlr.deleteUser);
 

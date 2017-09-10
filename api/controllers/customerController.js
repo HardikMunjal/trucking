@@ -18,7 +18,10 @@ var customer = {
     data.c_id = req.params.customer_id ? req.params.customer_id : null;
 
     cstmrModel.fetchCustomer(data,function(err, result){
-         return res.json(result)
+        if(err && err==='Not Found'){
+          return res.end("Customer Id Not Found")
+        }
+         return res.json(result);
       })
 
   },
@@ -59,6 +62,19 @@ var customer = {
       if(result){
         console.log(result)
          return res.json("user updated successfully");
+      }
+    })
+
+  },
+
+  deleteCustomer: function(req, res, next) {
+      
+   var data={};
+   data.c_id = req.params.customer_id ? req.params.customer_id : null;
+   cstmrModel.deleteCustomer(data,function(err, result){
+      if(result){
+        console.log(result)
+         return res.json("user deleted successfully");
       }
     })
 
