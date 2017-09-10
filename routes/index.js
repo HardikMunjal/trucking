@@ -10,10 +10,11 @@ module.exports = function (app) {
 
   //app.all('*', authCtrl.validateCredential, authCtrl.roleInjector)
   //**************** USER BASED API
-  // app.get('/trk/user', usrCtlr.fetchUsers);
-  // app.post('/trk/user/:user_id', usrCtlr.updateUser);
-  // app.put('/trk/user', usrCtlr.createUser);
-  // app.delete('/trk/user/:user_id', usrCtlr.deleteUser);
+    app.get('/trk/user', usrCtlr.fetchAllUser);
+    app.get('/trk/user/:user_id', usrCtlr.fetchUser);
+    app.post('/trk/user', usrCtlr.createNewUser);
+    app.post('/trk//:user_id', usrCtlr.updateUser);
+    app.delete('/trk/user/:user_id',usrCtlr.deleteUser);
 
   //**************** SERVICE BASED API
   // app.get('/trk/service', serCtlr.fetchUsers);
