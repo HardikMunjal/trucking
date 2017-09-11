@@ -1,6 +1,7 @@
 var error = require('./error');
 var usrCtlr = require('../api/controllers/userController');
-var serCtlr = require('../api/controllers/serviceController');
+var srvcCtlr = require('../api/controllers/serviceController');
+var loadCtlr = require('../api/controllers/loadController');
 var cstmrCtlr = require('../api/controllers/customerController');
 var authCtlr = require('../api/controllers/authController');
 
@@ -13,14 +14,22 @@ module.exports = function (app) {
     app.get('/trk/user', usrCtlr.fetchAllUser);
     app.get('/trk/user/:user_id', usrCtlr.fetchUser);
     app.post('/trk/user', usrCtlr.createNewUser);
-    app.post('/trk//:user_id', usrCtlr.updateUser);
+    app.post('/trk/user/:user_id', usrCtlr.updateUser);
     app.delete('/trk/user/:user_id',usrCtlr.deleteUser);
 
   //**************** SERVICE BASED API
-  // app.get('/trk/service', serCtlr.fetchUsers);
-  // app.post('/trk/service/:service_id', serCtlr.updateUser);
-  // app.put('/trk/service', serCtlr.createUser);
-  // app.delete('/trk/service/:service_id', serCtlr.deleteUser);
+    app.get('/trk/service', srvcCtlr.fetchAllService);
+    app.get('/trk/service/:service_id', srvcCtlr.fetchService);
+    app.post('/trk/service', srvcCtlr.createNewService);
+    app.post('/trk/service/:service_id', srvcCtlr.updateService);
+    app.delete('/trk/service/:service_id',srvcCtlr.deleteService);
+
+    //  //**************** LOAD BASED API
+    app.get('/trk/load', loadCtlr.fetchAllLoad);
+    app.get('/trk/load/:load_id', loadCtlr.fetchLoad);
+    app.post('/trk/load', loadCtlr.createNewLoad);
+    app.post('/trk/load/:load_id', loadCtlr.updateLoad);
+    app.delete('/trk/load/:load_id',loadCtlr.deleteLoad);
 
     //**************** CUSTOMER BASED API
      app.get('/trk/customer', cstmrCtlr.fetchAllCustomer);
