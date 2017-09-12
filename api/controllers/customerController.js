@@ -23,7 +23,8 @@ var customer = {
 
     cstmrModel.fetchCustomer(data,function(err, result){
         if(err && err==='Not Found'){
-         return res.end("Customer Id Not Found")
+          var message = "Customer Id Not Found"
+         return res.status(410).send(message);
          }
         
         else{
@@ -50,20 +51,22 @@ var customer = {
       
     }
     if(missing){
-      return res.json('Mandatory parameters are missing in customer Contacts')
+      var message = "Mandatory parameters are missing in customer Contacts"
+      return res.status(400).send(message);
     }
     data.users=req.body.contacts;
 
     console.log('dependency injection should not called')
 
     if(!req.body.name || !req.body.country || !req.body.city || !req.body.address || !req.body.active || !req.body.tax_id || !req.body.postal_code || !req.body.industry || !req.body.telephone1){
-       return res.json("Mandatory parameters are missing")
+       var message = "Mandatory parameters are missing in customer Contacts";
+       return res.status(400).send(message);
     }
     data.customer = req.body;
     
     cstmrModel.createNewCustomer(data,function(err, result){
       if(err){
-        return res.end(err)
+        return res.status(410).send(err.message);
       }
         console.log(result)
         return res.json("Customer added successfully");
@@ -77,7 +80,7 @@ var customer = {
    data.customer=req.body;
     cstmrModel.updateCustomer(data,function(err, result){
       if(err){
-        return res.end(err)
+        return res.status(410).send(err.message);
       }
 
         console.log(result)
@@ -92,10 +95,10 @@ var customer = {
    data.c_id = req.params.customer_id ? req.params.customer_id : null;
    cstmrModel.deleteCustomer(data,function(err, result){
         if(err){
-          return res.end(err)
+          return res.status(410).send(err.message);
         }
         console.log(result)
-         return res.json("Customer deleted successfully");
+        return res.json("Customer deleted successfully");
     })
 
   }
