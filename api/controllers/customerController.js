@@ -59,7 +59,7 @@ var customer = {
     console.log('dependency injection should not called')
 
     if(!req.body.name || !req.body.country || !req.body.city || !req.body.address || !req.body.active || !req.body.tax_id || !req.body.postal_code || !req.body.industry || !req.body.telephone1){
-       var message = "Mandatory parameters are missing in customer Contacts";
+       var message = "Mandatory parameters are missing in customer";
        return res.status(400).send(message);
     }
     data.customer = req.body;
