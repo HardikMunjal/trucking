@@ -4,8 +4,12 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 
-var userSchema = new Schema({
+var userCustomerSchema = new Schema({
 	customer_id:{
+        type: String,
+        default:''
+    },
+    user_id:{
         type: String,
         default:''
     },
@@ -23,7 +27,7 @@ var userSchema = new Schema({
 		default:Date.now
 	}
 });
+//here user-customer, from which collection name will be defined
+var userCustomer = mongoose.model('user-customer', userCustomerSchema);
 
-var user = mongoose.model('user', userSchema);
-
-module.exports = user;
+module.exports = userCustomer;

@@ -1,6 +1,6 @@
 var request = require('request');
 var Customer = require('../schemas/customerSchema');
-var User = require('../schemas/userSchema');
+var UserCustomer = require('../schemas/userCustomerSchema');
 
 
 
@@ -41,7 +41,7 @@ var cModel = {
         console.log(result)
         customer=result[0];
         //delete customer['__v'];
-        User.find({customer_id:data.c_id}).exec(function(err, result){
+        UserCustomer.find({customer_id:data.c_id}).exec(function(err, result){
 
          if(err){
             console.log("Error:", err);
@@ -75,8 +75,8 @@ var cModel = {
             user.customer_id=result.id;
           });
         
-          var user = new User(data.users[0]);
-          user.save(function(err, result){
+          var userCustomer = new UserCustomer(data.users[0]);
+          userCustomer.save(function(err, result){
               return cb(null,result);
           })
 
