@@ -92,6 +92,11 @@ var customer = {
         return res.status(410).send(err.message);
       }
         console.log(result)
+        if(!result){
+          var message = "Username or Email_id already exist";
+    
+          return res.status(400).send(message);
+        }
         return res.json("User added successfully");
     })
   },
