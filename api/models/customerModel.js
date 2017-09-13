@@ -38,11 +38,12 @@ var cModel = {
         console.log("Error:", err);
         return cb(err)
       }else{
-        console.log(result)
+        console.log('first one is working',result)
         customer=result[0];
         //delete customer['__v'];
         UserCustomer.find({customer_id:data.c_id}).exec(function(err, result){
-
+         
+         console.log(err,result);
          if(err){
             console.log("Error:", err);
             return cb(err)
@@ -50,6 +51,7 @@ var cModel = {
             if(!customer){
               return cb("Not Found")
             }
+
             var extensibleCustomer = customer.toObject();
             extensibleCustomer.contacts= result;
 
@@ -57,6 +59,7 @@ var cModel = {
             extensibleCustomer.loads_delivered=230;
             extensibleCustomer.loads_inprogress=7;
             extensibleCustomer.rating=4;
+            console.log(extensibleCustomer)
             return cb(null,extensibleCustomer);
           
           }

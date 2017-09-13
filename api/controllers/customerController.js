@@ -27,7 +27,7 @@ var customer = {
          return res.status(410).send(message);
          }
         
-        else{
+        else if(err){
           return res.status(410).send(err.message);
         }
          
