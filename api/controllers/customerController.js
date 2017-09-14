@@ -69,6 +69,11 @@ var customer = {
         return res.status(410).send(err.message);
       }
         console.log(result)
+        if(!result){
+          var message = "Some Error Occurred";
+    
+          return res.status(400).send(message);
+        }
         return res.json("Customer added successfully");
     })
   },

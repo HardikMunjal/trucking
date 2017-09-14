@@ -8,64 +8,81 @@ var mongoose = require('mongoose'),
 
 var UserSchema = new Schema({
     username: { 
-    	type: String
+    	type: String,
+        default:null
         //, required: true, index: { unique: true } 
     },
     email: { 
-    	type: String
+    	type: String,
+        default:null
         //, required: true, index: { unique: true } 
     },
     password: { 
-    	type: String
+    	type: String,
+        default:null
         //, required: true ,select: false
     },
     active: { 
-    	type: String
+    	type: String,
+        default:null
         //, required: true 
     },
     firstname: { 
-    	type: String
+    	type: String,
+        default:null
         //, required: true
     },
     lastname: { 
-    	type: String
+    	type: String,
+        default:null
         //, required: true 
     },
     middlename: { 
-    	type: String
+    	type: String,
+        default:null
         //, required: true 
     },
     national_id: { 
-    	type: String
+    	type: String,
+        default:null
         //, required: true 
     },
     id_photo: { 
-    	type: String
+    	type: String,
+        default:null
         //, required: true
     },
     user_photo: { 
-    	type: String//, required: true 
+    	type: String,
+        default:null//, required: true 
     },
     company: { 
-    	type: String//, required: true 
+    	type: String,
+        default:null//, required: true 
     },
     city: { 
-    	type: String//, required: true 
+    	type: String,
+        default:null//, required: true 
     },
     department: { 
-    	type: String//, required: true
+    	type: String,
+        default:null//, required: true
     },
     position: { 
-    	type: String//, required: true 
+    	type: String,
+        default:null//, required: true 
     },
     telephones: { 
-    	type: Array//, required: true 
+    	type: Array,
+        default:[]//, required: true 
     },
     role: { 
-    	type: String//, required: true 
+    	type: String,
+        default:null//, required: true 
     },
     driver_details: { 
-    	type: Object 
+    	type: Object,
+        default:{} 
     },
 
     createdAt:{
@@ -74,6 +91,7 @@ var UserSchema = new Schema({
 	}
 });
 
+/*
 UserSchema.pre('save', function(next) {
     var user = this;
 
@@ -101,6 +119,7 @@ UserSchema.methods.comparePassword = function(candidatePassword, cb) {
         cb(null, isMatch);
     });
 };
+*/
 
 module.exports = mongoose.model('User', UserSchema);
 

@@ -16,7 +16,7 @@ var sModel = {
         var extensibleService = result;
     
         extensibleService.forEach(function(ser, index) {
-          ser.customer_num=0;
+          ser.customer_num=5;
         });
 
         return cb(null,extensibleService);
@@ -36,7 +36,7 @@ var sModel = {
         console.log(result)
         service=result[0];
         var extensibleService = service.toObject();
-        extensibleService.customer_num=0;
+        extensibleService.customer_num=5;
         return cb(null,extensibleService);
       
       }

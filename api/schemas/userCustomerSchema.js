@@ -14,13 +14,16 @@ var userCustomerSchema = new Schema({
         default:''
     },
 	type:{
-        type: String
+        type: String,
+        default:null
 	},
 	username:{
-		type:String
+		type:String,
+        default:null
 	},
     department:{
-        type: String
+        type: String,
+        default:null
     },
 	createdAt:{
 		type:Date,

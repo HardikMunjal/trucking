@@ -8,19 +8,24 @@ var Schema = mongoose.Schema;
 
 var customerSchema = new Schema({
 	name:{
-		type:String
+		type:String,
+		default:null
 	},
 	country:{
-		type:String
+		type:String,
+		default:null
 	},
 	city:{
-		type:String
+		type:String,
+		default:null
 	},
 	address:{
-		type:String
+		type:String,
+		default:null
 	},
 	active:{
-        type: String
+        type: String,
+		default:null
 	},
 	industry:{
 		type:String,

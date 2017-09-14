@@ -7,17 +7,21 @@ var Schema = mongoose.Schema;
 var loadSchema = new Schema({
 	
 	name:{
-		type:String
+		type:String,
+        default:null
 		//required: true, index: { unique: true }
 	},
 	type:{
-        type: String//,required: true
+        type: String,
+        default:null//,required: true
 	},
 	weight:{
-		type :Object
+		type :Object,
+        default:{}
 	},
 	slot_time:{
-		type:Date
+		type:Date,
+        default:Date.now
 	},
     organization:{
         type:String
