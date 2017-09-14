@@ -8,52 +8,61 @@ var mongoose = require('mongoose'),
 
 var UserSchema = new Schema({
     username: { 
-    	type: String, required: true, index: { unique: true } 
+    	type: String
+        //, required: true, index: { unique: true } 
     },
     email: { 
-    	type: String, required: true, index: { unique: true } 
+    	type: String
+        //, required: true, index: { unique: true } 
     },
     password: { 
-    	type: String, required: true ,select: false
+    	type: String
+        //, required: true ,select: false
     },
     active: { 
-    	type: Boolean, required: true 
+    	type: String
+        //, required: true 
     },
     firstname: { 
-    	type: String, required: true
+    	type: String
+        //, required: true
     },
     lastname: { 
-    	type: String, required: true 
+    	type: String
+        //, required: true 
     },
     middlename: { 
-    	type: String, required: true 
+    	type: String
+        //, required: true 
     },
     national_id: { 
-    	type: String, required: true 
+    	type: String
+        //, required: true 
     },
     id_photo: { 
-    	type: String, required: true
+    	type: String
+        //, required: true
     },
     user_photo: { 
-    	type: String, required: true 
+    	type: String//, required: true 
     },
     company: { 
-    	type: String, required: true 
+    	type: String//, required: true 
     },
     city: { 
-    	type: String, required: true 
+    	type: String//, required: true 
     },
     department: { 
-    	type: String, required: true
+    	type: String//, required: true
     },
     position: { 
-    	type: String, required: true 
+    	type: String//, required: true 
     },
     telephones: { 
-    	type: Array, required: true 
+    	type: Array//, required: true 
     },
     role: { 
-    	type: String, required: true 
+    	type: String//, required: true 
     },
     driver_details: { 
     	type: Object 

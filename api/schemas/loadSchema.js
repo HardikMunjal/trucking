@@ -7,12 +7,11 @@ var Schema = mongoose.Schema;
 var loadSchema = new Schema({
 	
 	name:{
-		type:String,
-		required: true, index: { unique: true }
+		type:String
+		//required: true, index: { unique: true }
 	},
 	type:{
-        type: String,
-        required: true
+        type: String//,required: true
 	},
 	weight:{
 		type :Object

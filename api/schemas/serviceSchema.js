@@ -6,25 +6,24 @@ var Schema = mongoose.Schema;
 
 var serviceSchema = new Schema({
 	code:{
-		type:String,
-		required: true, index: { unique: true }
+		type:String//,required: true, index: { unique: true }
 	},
 	name:{
-		type:String,
-		required: true, index: { unique: true }
+		type:String
+		//,required: true, index: { unique: true }
 	},
 	short_name:{
-		type:String,
-		required: true, index: { unique: true }
+		type:String//,required: true, index: { unique: true }
 	},
 	description:{
         type: String
 	},
+	
 	icon:{
 		type :String
 	},
 	active:{
-		type: Boolean
+		type: String
 	},
    	createdAt:{
 		type:Date,

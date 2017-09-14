@@ -32,9 +32,9 @@ var load = {
     var l_id= true;
 
 
-    if(!req.body.type || !req.body.name){
-       return res.json("Mandatory parameters are missing")
-    }
+    // if(!req.body.type || !req.body.name){
+    //    return res.json("Mandatory parameters are missing")
+    // }
     data.load = req.body;
     
     loadModel.createNewLoad(data,function(err, result){

@@ -20,7 +20,7 @@ var customerSchema = new Schema({
 		type:String
 	},
 	active:{
-        type: Boolean
+        type: String
 	},
 	industry:{
 		type:String,
@@ -31,7 +31,7 @@ var customerSchema = new Schema({
 		default:null
 	},
 	postal_code:{
-		type:Number,
+		type:String,
 		default:null
 	},
 	icon:{
@@ -43,11 +43,11 @@ var customerSchema = new Schema({
 		default:null
 	},
 	telephone1:{
-		type:Number,
+		type: String,
 		default:null
 	},
 	telephone2:{
-		type:Number,
+		type:String,
 		default:null
 	},
 	createdAt:{

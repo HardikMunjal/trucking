@@ -31,9 +31,9 @@ var service = {
     var s_id= true;
 
 
-    if(!req.body.code || !req.body.name || !req.body.short_name || !req.body.description || !req.body.icon || !req.body.active){
-       return res.json("Mandatory parameters are missing")
-    }
+    // if(!req.body.code || !req.body.name || !req.body.short_name || !req.body.description || !req.body.icon || !req.body.active){
+    //    return res.json("Mandatory parameters are missing")
+    // }
     data.service = req.body;
     
     srvcModel.createNewService(data,function(err, result){

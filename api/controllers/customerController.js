@@ -39,29 +39,29 @@ var customer = {
    
     var data = {};
     var c_id= true;   
-    var missing = false;
-    if(req.body.contacts && req.body.contacts.constructor === Array){
-       //check user structure is correct or not
-       req.body.contacts.forEach(function(contact, index) {
-        if(!contact.username || !contact.type || !contact.department){
-          missing=true;
-          //break;
-        }
-      });
+    // var missing = false;
+    // if(req.body.contacts && req.body.contacts.constructor === Array){
+    //    //check user structure is correct or not
+    //    req.body.contacts.forEach(function(contact, index) {
+    //     if(!contact.username || !contact.type || !contact.department){
+    //       missing=true;
+    //       //break;
+    //     }
+    //   });
       
-    }
-    if(missing){
-      var message = "Mandatory parameters are missing in customer Contacts"
-      return res.status(400).send(message);
-    }
+    // }
+    // if(missing){
+    //   var message = "Mandatory parameters are missing in customer Contacts"
+    //   return res.status(400).send(message);
+    // }
     data.users=req.body.contacts;
 
     console.log('dependency injection should not called')
 
-    if(!req.body.name || !req.body.country || !req.body.city || !req.body.address || !req.body.active || !req.body.tax_id || !req.body.postal_code || !req.body.industry || !req.body.telephone1){
-       var message = "Mandatory parameters are missing in customer";
-       return res.status(400).send(message);
-    }
+    // if(!req.body.name || !req.body.country || !req.body.city || !req.body.address || !req.body.active || !req.body.tax_id || !req.body.postal_code || !req.body.industry || !req.body.telephone1){
+    //    var message = "Mandatory parameters are missing in customer";
+    //    return res.status(400).send(message);
+    // }
     data.customer = req.body;
     
     cstmrModel.createNewCustomer(data,function(err, result){

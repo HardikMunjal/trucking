@@ -42,48 +42,48 @@ var customer = {
    
 
     console.log(req.body)
-    if(!req.body.username || !req.body.email || !req.body.password || !req.body.active || !req.body.firstname || !req.body.lastname || !req.body.national_id || !req.body.id_photo || !req.body.user_photo || !req.body.company || !req.body.city || !req.body.department || !req.body.position || !req.body.role){
-       var message = "Mandatory parameters are missing in User";
-       return res.status(400).send(message);
-    }
+    // if(!req.body.username || !req.body.email || !req.body.password || !req.body.active || !req.body.firstname || !req.body.lastname || !req.body.national_id || !req.body.id_photo || !req.body.user_photo || !req.body.company || !req.body.city || !req.body.department || !req.body.position || !req.body.role){
+    //    var message = "Mandatory parameters are missing in User";
+    //    return res.status(400).send(message);
+    // }
 
-    if(req.body.role === 'Driver'){
+    // if(req.body.role === 'Driver'){
 
-      if(req.body.driver_details && req.body.driver_details.constructor === Array){
-       //check user structure is correct or not
-       req.body.driver_details.forEach(function(driver, index) {
+    //   if(req.body.driver_details && req.body.driver_details.constructor === Array){
+    //    //check user structure is correct or not
+    //    req.body.driver_details.forEach(function(driver, index) {
 
-        if(!driver.driving_license || !driver.dl_photo || !driver.dl_expiryDate || !driver.rntt_id || !driver.rntt_photo || !driver.rntt_expiryDate){
-           missing=true;
-          //break;
-         }
-      });
-      //data.tel=req.body.telephones;
-     }
-     if(missing){
-      var message = "Mandatory driver details are missing";
-      missing = false; 
-      return res.status(400).send(message);
-     }
+    //     if(!driver.driving_license || !driver.dl_photo || !driver.dl_expiryDate || !driver.rntt_id || !driver.rntt_photo || !driver.rntt_expiryDate){
+    //        missing=true;
+    //       //break;
+    //      }
+    //   });
+    //   //data.tel=req.body.telephones;
+    //  }
+    //  if(missing){
+    //   var message = "Mandatory driver details are missing";
+    //   missing = false; 
+    //   return res.status(400).send(message);
+    //  }
       
-    }
+    // }
 
-    if(req.body.telephones && req.body.telephones.constructor === Array){
-       //check user structure is correct or not
-       req.body.telephones.forEach(function(telephone, index) {
-        if(!telephone.tel_num || !telephone.type ){
-          missing=true;
-          //break;
-        }
-      });
-      //data.tel=req.body.telephones;
-    }
+    // if(req.body.telephones && req.body.telephones.constructor === Array){
+    //    //check user structure is correct or not
+    //    req.body.telephones.forEach(function(telephone, index) {
+    //     if(!telephone.tel_num || !telephone.type ){
+    //       missing=true;
+    //       //break;
+    //     }
+    //   });
+    //   //data.tel=req.body.telephones;
+    // }
 
-    if(missing){
-      var message = "Mandatory parameters are missing in Telephone details";
-      missing = false; 
-      return res.status(400).send(message);
-     }
+    // if(missing){
+    //   var message = "Mandatory parameters are missing in Telephone details";
+    //   missing = false; 
+    //   return res.status(400).send(message);
+    //  }
 
     data.user = req.body;
     
