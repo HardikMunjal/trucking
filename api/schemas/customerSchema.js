@@ -47,6 +47,14 @@ var customerSchema = new Schema({
 		type:String,
 		default:null
 	},
+	RNC_no:{
+		type:String,
+		default:null
+	},
+	website:{
+       type:String,
+		default:null
+	},
 	telephone1:{
 		type: String,
 		default:null
