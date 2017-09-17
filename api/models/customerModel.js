@@ -73,19 +73,19 @@ var cModel = {
       var customer = new Customer(json)
       customer.save(function(err, result){
 
-        if(data.users){
-          data.users.forEach(function(user, index) {
-            user.customer_id=result.id;
-          });
+        // if(data.users){
+        //   data.users.forEach(function(user, index) {
+        //     user.customer_id=result.id;
+        //   });
         
-          var userCustomer = new UserCustomer(data.users[0]);
-          userCustomer.save(function(err, result){
-              return cb(null,result);
-          })
+        //   var userCustomer = new UserCustomer(data.users[0]);
+        //   userCustomer.save(function(err, result){
+        //       return cb(null,result);
+        //   })
 
-        }else{
+        // }else{
             return cb(null,result);
-        }
+        //}
       })
     },
  

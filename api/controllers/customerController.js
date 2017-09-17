@@ -54,7 +54,7 @@ var customer = {
     //   var message = "Mandatory parameters are missing in customer Contacts"
     //   return res.status(400).send(message);
     // }
-    data.users=req.body.contacts;
+    //data.users=req.body.contacts;
 
     console.log('dependency injection should not called')
 

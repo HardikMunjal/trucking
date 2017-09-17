@@ -63,6 +63,10 @@ var customerSchema = new Schema({
 		type:String,
 		default:null
 	},
+	contacts:{
+       type: Array,
+		default:null
+	},
 	createdAt:{
 		type:Date,
 		default:Date.now
