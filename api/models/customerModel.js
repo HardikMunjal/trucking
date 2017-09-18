@@ -1,6 +1,6 @@
 var request = require('request');
 var Customer = require('../schemas/customerSchema');
-var UserCustomer = require('../schemas/userCustomerSchema');
+var User = require('../schemas/userSchema');
 
 
 
@@ -41,9 +41,19 @@ var cModel = {
         console.log('first one is working',result)
         customer=result[0];
         //delete customer['__v'];
-        UserCustomer.find({customer_id:data.c_id}).exec(function(err, result){
+        var contact_ids=[];
+        
+        customer.contacts.forEach(function(contact, index) {
+          contact_ids.push(contact.user_id)
+        });
+        console.log('contactsssssssssssssssssssss',contact_ids);
+        User.find()
+        .where('_id')
+        .in(contact_ids)
+        .select({ "firstname": 1, "lastname": 1,"telephones": 1})
+        .exec(function(err, result){
          
-         console.log(err,result);
+         console.log('contacts returnedddddddd',err,result);
          if(err){
             console.log("Error:", err);
             return cb(err)
@@ -53,6 +63,9 @@ var cModel = {
             }
 
             var extensibleCustomer = customer.toObject();
+
+            delete extensibleCustomer.contacts;
+
             extensibleCustomer.contacts= result;
 
             extensibleCustomer.service_used=2;
