@@ -4,6 +4,7 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var User = require('./userSchema');
 
 
 var customerSchema = new Schema({
@@ -67,6 +68,10 @@ var customerSchema = new Schema({
        type: Array,
 		default:null
 	},
+	contact_ids: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+	// fans: [{ 
+	// 		  user_id:{type: Schema.Types.ObjectId, ref: 'User'}
+	// 	  }],
 	createdAt:{
 		type:Date,
 		default:Date.now

@@ -9,7 +9,7 @@ var cModel = {
 
   fetchAllCustomer: function(data,cb){
     
-     Customer.find({}).limit(data.limit).lean().exec(function(err, result){
+     Customer.find().select("-contacts").populate({ path: 'contact_ids', select: { "firstname": 1, "lastname": 1,"telephones": 1} }).limit(data.limit).lean().exec(function(err, result){
 
       if(err){
         return cb(err)
@@ -66,7 +66,7 @@ var cModel = {
 
             delete extensibleCustomer.contacts;
 
-            extensibleCustomer.contacts= result;
+            extensibleCustomer.contact_ids= result;
 
             extensibleCustomer.service_used=2;
             extensibleCustomer.loads_delivered=230;

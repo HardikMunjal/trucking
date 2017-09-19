@@ -62,8 +62,19 @@ var customer = {
     //    var message = "Mandatory parameters are missing in customer";
     //    return res.status(400).send(message);
     // }
+     
+     var contact_ids=[];
+     if(req.body.contacts && req.body.contacts.constructor === Array){
+     
+       req.body.contacts.forEach(function(contact, index) {
+          
+          contact_ids.push(contact.user_id)
+        });
+   }
+
+    req.body.contact_ids=contact_ids;
     data.customer = req.body;
-    
+   
     cstmrModel.createNewCustomer(data,function(err, result){
       if(err){
         return res.status(410).send(err.message);
