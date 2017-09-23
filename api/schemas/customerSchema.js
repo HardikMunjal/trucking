@@ -68,10 +68,10 @@ var customerSchema = new Schema({
        type: Array,
 		default:null
 	},
-	contact_ids: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-	// fans: [{ 
-	// 		  user_id:{type: Schema.Types.ObjectId, ref: 'User'}
-	// 	  }],
+	contact_ids: [{
+					 type: Schema.Types.ObjectId,
+					  ref: 'User' 
+					}],
 	createdAt:{
 		type:Date,
 		default:Date.now

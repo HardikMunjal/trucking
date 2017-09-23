@@ -6,6 +6,8 @@ var mongoose = require('mongoose'),
    // bcrypt = require('bcrypt'),
     SALT_WORK_FACTOR = 10;
 
+var team = require('./teamSchema');
+
 var UserSchema = new Schema({
     username: { 
     	type: String,
@@ -84,12 +86,36 @@ var UserSchema = new Schema({
     	type: Object,
         default:{} 
     },
+    // team_ids: [{
+    //                  type: Schema.Types.ObjectId,
+    //                   ref: 'team' 
+    //                 }],
 
     createdAt:{
 		type:Date,
 		default:Date.now
 	}
 });
+
+
+// username 
+// email
+// team=[T1]
+
+
+
+// team_name =T1
+// roles=[R1,R2]
+
+
+
+// role_name=R1
+// rights=[rite1,rite2]
+
+
+
+
+
 
 /*
 UserSchema.pre('save', function(next) {
