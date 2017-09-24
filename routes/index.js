@@ -4,6 +4,8 @@ var srvcCtlr = require('../api/controllers/serviceController');
 var loadCtlr = require('../api/controllers/loadController');
 var cstmrCtlr = require('../api/controllers/customerController');
 var authCtlr = require('../api/controllers/authController');
+var roleCtlr = require('../api/controllers/roleController');
+var rightCtlr = require('../api/controllers/rightController');
 
 
 module.exports = function (app) {
@@ -39,5 +41,15 @@ module.exports = function (app) {
      app.delete('/trk/customer/:customer_id',cstmrCtlr.deleteCustomer);
   // app.put('/trk/service', serCtlr.createUser);
   // app.delete('/trk/service/:service_id', serCtlr.deleteUser);
+
+  //**************** RIGHT BASED API
+     app.get('/trk/right', rightCtlr.fetchAllRight);
+     app.get('/trk/right/:right_id', rightCtlr.fetchRight);
+     app.post('/trk/right', rightCtlr.createNewRight);
+     app.post('/trk/right/:right_id', rightCtlr.updateRight);
+     app.delete('/trk/right/:right_id',rightCtlr.deleteRight);
+
+
+     app.post('/trk/role', roleCtlr.createNewRole);
 
 }

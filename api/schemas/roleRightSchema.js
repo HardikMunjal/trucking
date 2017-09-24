@@ -3,15 +3,16 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var right_u = require('./rightSchema');
+//var right_u = require('./rightSchema');
 
 
-var roleSchema = new Schema({
-	name:{
+var roleRightSchema = new Schema({
+	
+	role_id: {
 		type:String,
 		default:null
 	},
-	created_by:{
+	right_code:{
 		type:String,
 		default:null
 	},
@@ -25,6 +26,6 @@ var roleSchema = new Schema({
 	}
 });
 
-var role_u = mongoose.model('role_u', roleSchema);
+var role_right_u = mongoose.model('role_right_u', roleRightSchema);
 
-module.exports = role_u;
+module.exports = role_right_u;
