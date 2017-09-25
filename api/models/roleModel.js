@@ -17,6 +17,26 @@ var cModel = {
         console.log(result)
         var extensiblerole = result;
 
+         extensiblerole.forEach(function(role, index) {
+          RoleRight.find({ 'role_id': role._id })
+            .lean()
+            .select({ "right_code": 1})
+            .exec(function(err, result){
+             
+             console.log('contacts returnedddddddd',err,result);
+             if(err){
+                console.log("Error:", err);
+                return cb(err)
+              }else{
+              
+                role.right_ids=result;
+                // console.log(extensiblerole)
+                // return cb(null,extensiblerole);
+              
+              }
+            })
+        });
+
         return cb(null,extensiblerole);
       }
     })
@@ -25,13 +45,34 @@ var cModel = {
   fetchrole: function(data,cb){
     
     var role=[];
-    role.find({_id:data.role_id}).exec(function(err, result){
+    role.find({_id:data.role_id}).lean().exec(function(err, result){
 
      if(err){
         return cb(err)
       }else{
         console.log(result)
         var extensiblerole = result;
+        RoleRight.find({ 'role_id': extensiblerole._id })
+          .lean()
+          .select({ "right_code": 1})
+          .exec(function(err, result){
+           
+           console.log('contacts returnedddddddd',err,result);
+           if(err){
+              console.log("Error:", err);
+              return cb(err)
+            }else{
+              if(!extensiblerole){
+                return cb("Not Found")
+              }
+              extensiblerole.right_ids=result;
+
+             
+              console.log(extensiblerole)
+              return cb(null,extensiblerole);
+            
+            }
+          })
 
         return cb(null,extensiblerole);
       }

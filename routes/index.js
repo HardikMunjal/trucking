@@ -6,7 +6,9 @@ var cstmrCtlr = require('../api/controllers/customerController');
 var authCtlr = require('../api/controllers/authController');
 var roleCtlr = require('../api/controllers/roleController');
 var rightCtlr = require('../api/controllers/rightController');
-
+var areaCtlr = require('../api/controllers/coveringAreaController');
+var teamCtlr = require('../api/controllers/teamController');
+var roleRightCtlr = require('../api/controllers/roleRightController');
 
 module.exports = function (app) {
 
@@ -50,6 +52,25 @@ module.exports = function (app) {
      app.delete('/trk/right/:right_id',rightCtlr.deleteRight);
 
 
+  //************* ROLE BASED API
+     app.get('/trk/role', roleCtlr.fetchAllRole);
+     app.get('/trk/role/:role_id', roleCtlr.fetchRole);
      app.post('/trk/role', roleCtlr.createNewRole);
+
+  //************** ROLE-RIGHTS BASED API
+     app.get('/trk/role/rights', roleRightCtlr.fetchAllRoleRights);
+
+  //************** TEAM BASED API
+     app.get('/trk/team', teamCtlr.fetchAllTeam);
+     app.get('/trk/team/:team_id', teamCtlr.fetchTeam);
+     app.post('/trk/team', roleCtlr.createNewTeam);
+
+
+     //**************** COVERING AREA BASED API
+     app.get('/trk/area', areaCtlr.fetchAllCoveringArea);
+     app.get('/trk/area/:coveringArea_id', areaCtlr.fetchCoveringArea);
+     app.post('/trk/area', areaCtlr.createNewCoveringArea);
+     app.post('/trk/area/:coveringArea_id', areaCtlr.updateCoveringArea);
+     app.delete('/trk/area/:coveringArea_id',areaCtlr.deleteCoveringArea);
 
 }
