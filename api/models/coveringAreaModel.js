@@ -24,7 +24,7 @@ var cModel = {
 
   fetchCoveringArea: function(data,cb){
     
-    var CoveringArea=[];
+    //var CoveringArea=[];
     CoveringArea.find({_id:data.CoveringArea_id}).exec(function(err, result){
 
      if(err){
@@ -40,8 +40,8 @@ var cModel = {
   
   createNewCoveringArea: function(data,cb){
       var json = data.CoveringArea;
-      var CoveringArea = new CoveringArea(json)
-      CoveringArea.save(function(err, result){
+      var coveringArea = new CoveringArea(json)
+      coveringArea.save(function(err, result){
             return cb(null,result);
         //}
       })

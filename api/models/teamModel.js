@@ -1,5 +1,5 @@
 var request = require('request');
-var team = require('../schemas/teamSchema');
+var Team = require('../schemas/teamSchema');
 var User = require('../schemas/userSchema');
 
 
@@ -9,7 +9,7 @@ var cModel = {
 
   fetchAllTeam: function(data,cb){
     
-     team.find().limit(data.limit).lean().exec(function(err, result){
+     Team.find().limit(data.limit).lean().exec(function(err, result){
 
       if(err){
         return cb(err)
@@ -25,7 +25,7 @@ var cModel = {
   fetchTeam: function(data,cb){
     
     var team=[];
-    team.find({_id:data.team_id}).exec(function(err, result){
+    Team.find({_id:data.team_id}).exec(function(err, result){
 
      if(err){
         return cb(err)
@@ -40,8 +40,9 @@ var cModel = {
   
   createNewTeam: function(data,cb){
       var json = data.team;
-      var team = new team(json)
+      var team = new Team(json);
       team.save(function(err, result){
+        console.log(err,result)
             return cb(null,result);
         //}
       })
@@ -49,7 +50,7 @@ var cModel = {
  
   updateTeam: function(data,cb){
       
-       team.update({_id: data.c_id}, data.team, function(err, result) {
+       Team.update({_id: data.c_id}, data.team, function(err, result) {
         console.log(err,result)
         if (err) {
           return cb(err);
@@ -61,7 +62,7 @@ var cModel = {
 
    deleteTeam: function(data,cb){
       
-      team.findOneAndRemove({_id: data.c_id}, function(err, result) {
+      Team.findOneAndRemove({_id: data.c_id}, function(err, result) {
         if (err) return cb(err);
 
         // we have deleted the user

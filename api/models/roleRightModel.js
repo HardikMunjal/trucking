@@ -9,7 +9,7 @@ var cModel = {
 
   fetchAllRoleRight: function(data,cb){
   
-     RoleRight.find().limit(data.limit).lean().exec(function(err, result){
+     RoleRight.find().limit(data.limit).populate({ path: 'role_id', select: { "name": 1} }).lean().exec(function(err, result){
 
       if(err){
         return cb(err)

@@ -3,14 +3,15 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-//var right_u = require('./rightSchema');
+var role_u = require('./roleSchema');
 
 
 var roleRightSchema = new Schema({
 	
 	role_id: {
 		type:String,
-		default:null
+		default:null,
+		ref: 'role_u'
 	},
 	right_code:{
 		type:String,
