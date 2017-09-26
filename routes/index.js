@@ -58,12 +58,12 @@ module.exports = function (app) {
      app.post('/trk/role', roleCtlr.createNewRole);
 
   //************** ROLE-RIGHTS BASED API
-     app.get('/trk/role/rights', roleRightCtlr.fetchAllRoleRights);
+     app.get('/trk/role-rights', roleRightCtlr.fetchAllRoleRight);
 
   //************** TEAM BASED API
      app.get('/trk/team', teamCtlr.fetchAllTeam);
      app.get('/trk/team/:team_id', teamCtlr.fetchTeam);
-     app.post('/trk/team', roleCtlr.createNewTeam);
+     app.post('/trk/team', teamCtlr.createNewTeam);
 
 
      //**************** COVERING AREA BASED API

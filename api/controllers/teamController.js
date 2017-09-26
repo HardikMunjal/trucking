@@ -1,4 +1,4 @@
-var teamModel = require('../models/TeamModel');
+var teamModel = require('../models/teamModel');
 var async = require('async');
 
 var team = {

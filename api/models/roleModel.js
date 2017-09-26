@@ -7,9 +7,9 @@ var RoleRight = require('../schemas/roleRightSchema');
 var cModel = {
 
 
-  fetchAllrole: function(data,cb){
+  fetchAllRole: function(data,cb){
     
-     role.find().limit(data.limit).lean().exec(function(err, result){
+     Role.find().limit(data.limit).lean().exec(function(err, result){
 
       if(err){
         return cb(err)
@@ -30,28 +30,33 @@ var cModel = {
               }else{
               
                 role.right_ids=result;
-                // console.log(extensiblerole)
-                // return cb(null,extensiblerole);
+                console.log(index,extensiblerole.length)
+
+                if(index+1 ==extensiblerole.length){
+                 return cb(null,extensiblerole);
+                }
               
               }
             })
         });
 
-        return cb(null,extensiblerole);
+        //return cb(null,extensiblerole);
       }
     })
   },
 
-  fetchrole: function(data,cb){
+  fetchRole: function(data,cb){
     
-    var role=[];
-    role.find({_id:data.role_id}).lean().exec(function(err, result){
+    //var role=[];
+    Role.find({_id:data.role_id}).lean().exec(function(err, result){
 
      if(err){
         return cb(err)
       }else{
-        console.log(result)
-        var extensiblerole = result;
+        
+        var extensiblerole = result[0];
+        console.log('HBKHKHK result',extensiblerole._id)
+
         RoleRight.find({ 'role_id': extensiblerole._id })
           .lean()
           .select({ "right_code": 1})
@@ -74,7 +79,7 @@ var cModel = {
             }
           })
 
-        return cb(null,extensiblerole);
+        //return cb(null,extensiblerole);
       }
     })
   },
@@ -90,7 +95,7 @@ var cModel = {
           rData.role_id= result.id;
 
           data.role.right_codes.forEach(function(r_code, index) {
-            rData.r_code=r_code;
+            rData.right_code=r_code;
             var roleRight = new RoleRight(rData);
             roleRight.save(function(err, result){
                 //return cb(null,result);
@@ -105,9 +110,9 @@ var cModel = {
       })
     },
  
-  updaterole: function(data,cb){
+  updateRole: function(data,cb){
       
-       role.update({_id: data.c_id}, data.role, function(err, result) {
+       Role.update({_id: data.c_id}, data.role, function(err, result) {
         console.log(err,result)
         if (err) {
           return cb(err);
@@ -117,9 +122,9 @@ var cModel = {
       
     },
 
-   deleterole: function(data,cb){
+   deleteRole: function(data,cb){
       
-      role.findOneAndRemove({_id: data.c_id}, function(err, result) {
+      Role.findOneAndRemove({_id: data.c_id}, function(err, result) {
         if (err) return cb(err);
 
         // we have deleted the user

@@ -1,5 +1,5 @@
 var request = require('request');
-var CoveringArea = require('../schemas/CoveringAreaSchema');
+var CoveringArea = require('../schemas/coveringAreaSchema');
 var User = require('../schemas/userSchema');
 
 

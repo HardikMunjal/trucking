@@ -3,11 +3,11 @@ var async = require('async');
 
 var role = {
 
-  fetchAllrole: function(req, res, next) {
+  fetchAllRole: function(req, res, next) {
    
     var data = {};
     data.limit=100;
-    roleModel.fetchAllrole(data,function(err, result){
+    roleModel.fetchAllRole(data,function(err, result){
       if(err){
         return res.status(410).send(err.message);
       }
@@ -16,12 +16,15 @@ var role = {
       })
   },
 
-  fetchrole: function(req, res, next) {
+
+
+
+  fetchRole: function(req, res, next) {
    
     var data = {};
     data.role_id = req.params.role_id ? req.params.role_id : null;
 
-    roleModel.fetchrole(data,function(err, result){
+    roleModel.fetchRole(data,function(err, result){
         if(err && err==='Not Found'){
           var message = "role Id Not Found"
          return res.status(410).send(message);
@@ -55,12 +58,12 @@ var role = {
     })
   },
 
-  updaterole: function(req, res, next) {
+  updateRole: function(req, res, next) {
       
    var data={};
    data.c_id = req.params.role_id ? req.params.role_id : null;
    data.role=req.body;
-    roleModel.updaterole(data,function(err, result){
+    roleModel.updateRole(data,function(err, result){
       if(err){
         return res.status(410).send(err.message);
       }
@@ -71,11 +74,11 @@ var role = {
 
   },
 
-  deleterole: function(req, res, next) {
+  deleteRole: function(req, res, next) {
       
    var data={};
    data.c_id = req.params.role_id ? req.params.role_id : null;
-   roleModel.deleterole(data,function(err, result){
+   roleModel.deleteRole(data,function(err, result){
         if(err){
           return res.status(410).send(err.message);
         }

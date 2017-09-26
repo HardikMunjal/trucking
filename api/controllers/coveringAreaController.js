@@ -1,4 +1,4 @@
-var CoveringAreaModel = require('../models/CoveringAreaModel');
+var CoveringAreaModel = require('../models/coveringAreaModel');
 var async = require('async');
 
 var CoveringArea = {
