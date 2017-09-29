@@ -1,6 +1,3 @@
-
-
-
 // organization are big clients or customers,
 
 // each organization will have some contacts
@@ -93,6 +90,7 @@
 // rntt expiration dateo
 
 
+
 var request = require('request');
 var User = require('../schemas/userSchema');
 
@@ -103,7 +101,16 @@ var cModel = {
 
   fetchAllUser: function(data,cb){
     
-     User.find({}).limit(data.limit).lean().exec(function(err, result){
+     User.find({})
+     .limit(data.limit)
+     .lean()
+     .populate(
+      { path: 'team_ids' , populate: [
+      { path: 'role_ids', populate : {path : 'role_id'} , select: { "role_id": 1, "right_code": 1} },
+      { path: 'covArea_ids', select: { "name": 1, "code": 1} }
+      ], select: { "name": 1, "role_ids": 1 ,"covArea_ids":1} }
+      )
+     .exec(function(err, result){
 
       if(err){
         return cb(err)

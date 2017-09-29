@@ -3,7 +3,7 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var role_u = require('./roleSchema');
+var role_right_u = require('./roleRightSchema');
 var cov_area = require('./coveringAreaSchema');
 
 
@@ -14,7 +14,7 @@ var teamSchema = new Schema({
 	},
 	role_ids: [{
 					 type: Schema.Types.ObjectId,
-					  ref: 'role_u' 
+					  ref: 'role_right_u' 
 					}],
 	covArea_ids: [{
 					 type: Schema.Types.ObjectId,

@@ -9,7 +9,14 @@ var cModel = {
 
   fetchAllTeam: function(data,cb){
     
-     Team.find().limit(data.limit).lean().exec(function(err, result){
+     Team.find()
+     .populate([
+      { path: 'role_ids', populate : {path : 'role_id'} , select: { "role_id": 1, "right_code": 1} },
+      { path: 'covArea_ids', select: { "name": 1, "code": 1} }
+      ])
+     .limit(data.limit)
+     .lean()
+     .exec(function(err, result){
 
       if(err){
         return cb(err)
@@ -25,7 +32,12 @@ var cModel = {
   fetchTeam: function(data,cb){
     
     var team=[];
-    Team.find({_id:data.team_id}).exec(function(err, result){
+    Team.find({_id:data.team_id})
+    .populate([
+      { path: 'role_ids', populate : {path : 'role_id'} , select: { "role_id": 1, "right_code": 1} },
+      { path: 'covArea_ids', select: { "name": 1, "code": 1} }
+      ])
+    .exec(function(err, result){
 
      if(err){
         return cb(err)
