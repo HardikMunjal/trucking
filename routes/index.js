@@ -13,7 +13,8 @@ var roleRightCtlr = require('../api/controllers/roleRightController');
 module.exports = function (app) {
 
 
-  //app.all('*', authCtrl.validateCredential, authCtrl.roleInjector)
+    app.post('/authenticate', authCtlr.validateCredential)//, authCtrl.roleInjector)
+
   //**************** USER BASED API
     app.get('/trk/user', usrCtlr.fetchAllUser);
     app.get('/trk/user/:user_id', usrCtlr.fetchUser);
