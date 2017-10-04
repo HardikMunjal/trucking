@@ -20,6 +20,10 @@ var teamSchema = new Schema({
 					 type: Schema.Types.ObjectId,
 					  ref: 'cov_area' 
 					}],
+	description:{
+		type:String,
+		default:null
+	},
 	created_by:{
 		type:String,
 		default:null
