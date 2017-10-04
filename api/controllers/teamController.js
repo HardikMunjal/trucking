@@ -58,7 +58,7 @@ var team = {
   updateTeam: function(req, res, next) {
       
    var data={};
-   data.c_id = req.params.team_id ? req.params.team_id : null;
+   data.t_id = req.params.team_id ? req.params.team_id : null;
    data.team=req.body;
     teamModel.updateTeam(data,function(err, result){
       if(err){
@@ -74,7 +74,7 @@ var team = {
   deleteTeam: function(req, res, next) {
       
    var data={};
-   data.c_id = req.params.team_id ? req.params.team_id : null;
+   data.t_id = req.params.team_id ? req.params.team_id : null;
    teamModel.deleteTeam(data,function(err, result){
         if(err){
           return res.status(410).send(err.message);

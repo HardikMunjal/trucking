@@ -62,7 +62,7 @@ var cModel = {
  
   updateTeam: function(data,cb){
       
-       Team.update({_id: data.c_id}, data.team, function(err, result) {
+       Team.update({_id: data.t_id}, data.team, function(err, result) {
         console.log(err,result)
         if (err) {
           return cb(err);
@@ -74,7 +74,7 @@ var cModel = {
 
    deleteTeam: function(data,cb){
       
-      Team.findOneAndRemove({_id: data.c_id}, function(err, result) {
+      Team.findOneAndRemove({_id: data.t_id}, function(err, result) {
         if (err) return cb(err);
 
         // we have deleted the user

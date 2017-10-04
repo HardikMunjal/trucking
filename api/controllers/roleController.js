@@ -61,7 +61,7 @@ var role = {
   updateRole: function(req, res, next) {
       
    var data={};
-   data.c_id = req.params.role_id ? req.params.role_id : null;
+   data.r_id = req.params.role_id ? req.params.role_id : null;
    data.role=req.body;
     roleModel.updateRole(data,function(err, result){
       if(err){
@@ -77,7 +77,7 @@ var role = {
   deleteRole: function(req, res, next) {
       
    var data={};
-   data.c_id = req.params.role_id ? req.params.role_id : null;
+   data.r_id = req.params.role_id ? req.params.role_id : null;
    roleModel.deleteRole(data,function(err, result){
         if(err){
           return res.status(410).send(err.message);

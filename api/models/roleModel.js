@@ -112,7 +112,7 @@ var cModel = {
  
   updateRole: function(data,cb){
       
-       Role.update({_id: data.c_id}, data.role, function(err, result) {
+       Role.update({_id: data.r_id}, data.role, function(err, result) {
         console.log(err,result)
         if (err) {
           return cb(err);
@@ -124,7 +124,7 @@ var cModel = {
 
    deleteRole: function(data,cb){
       
-      Role.findOneAndRemove({_id: data.c_id}, function(err, result) {
+      Role.findOneAndRemove({_id: data.r_id}, function(err, result) {
         if (err) return cb(err);
 
         // we have deleted the user
