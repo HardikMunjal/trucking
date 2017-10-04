@@ -3,7 +3,7 @@ const app = express();
 const router = express.Router();
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const expressSession = require('express-session');
+const session = require('express-session');
 const request = require('request');
 const colors = require('colors');
 const cors_sec = require('./routes/corsheaders')
@@ -16,6 +16,15 @@ const http = require('http').Server(app);
 
 // Middlewares for HTTP Request and cors handlers
 app.use('/', cors_sec.CrossOriginHeaders);
+
+
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}))
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({ 
  	limit: '10mb'
