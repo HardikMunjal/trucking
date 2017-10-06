@@ -11,7 +11,7 @@ var cModel = {
     
      Team.find()
      .populate([
-      { path: 'role_ids', populate : {path : 'role_id'} , select: { "role_id": 1, "right_code": 1} },
+      { path: 'role_right_ids.rol_right', populate : {path : 'role_id'} , select: { "role_id": 1, "right_code": 1} },
       { path: 'covArea_ids', select: { "name": 1, "code": 1} }
       ])
      .limit(data.limit)
@@ -34,7 +34,7 @@ var cModel = {
     var team=[];
     Team.find({_id:data.team_id})
     .populate([
-      { path: 'role_ids', populate : {path : 'role_id'} , select: { "role_id": 1, "right_code": 1} },
+      { path: 'role_right_ids.rol_right', populate : {path : 'role_id'} , select: { "role_id": 1, "right_code": 1} },
       { path: 'covArea_ids', select: { "name": 1, "code": 1} }
       ])
     .exec(function(err, result){
