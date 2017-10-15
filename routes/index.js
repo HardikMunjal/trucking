@@ -9,9 +9,29 @@ var rightCtlr = require('../api/controllers/rightController');
 var areaCtlr = require('../api/controllers/coveringAreaController');
 var teamCtlr = require('../api/controllers/teamController');
 var roleRightCtlr = require('../api/controllers/roleRightController');
+var xlsxj = require("xlsx-to-json");
 
 module.exports = function (app) {
 
+    app.get('/upl',function(req, res, next) {
+                res.render('chat.html');
+              });
+
+    app.get('/test',function(req,res){
+        
+          xlsxj({
+            input: "Hardik.xlsx", 
+            output: "output.json",
+            sheet: "03-10-2017",
+            lowerCaseHeaders:true //converts excel header rows into lowercase as json keys
+          }, function(err, result) {
+            if(err) {
+              console.error(err);
+            }else {
+              res.json(result);
+            }
+          }); 
+    })
 
     app.post('/authenticate', authCtlr.validateCredential);//, authCtrl.roleInjector)
     app.get('/authenticate', authCtlr.testCredential);//, authCtrl.roleInjector)

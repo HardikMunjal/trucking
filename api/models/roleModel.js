@@ -40,7 +40,7 @@ var cModel = {
             })
         });
 
-        //return cb(null,extensiblerole);
+        return cb(null,extensiblerole);
       }
     })
   },
