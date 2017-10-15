@@ -7,15 +7,23 @@ var role_right_u = require('./roleRightSchema');
 var cov_area = require('./coveringAreaSchema');
 
 
+
 var teamSchema = new Schema({
 	name:{
 		type:String,
 		default:null
 	},
-	role_ids: [{
+	role_right_ids: [{
+
+				rol_right:{
 					 type: Schema.Types.ObjectId,
 					  ref: 'role_right_u' 
-					}],
+					},
+					selected:{
+						type:String,
+						default:null
+					}
+				}],
 	covArea_ids: [{
 					 type: Schema.Types.ObjectId,
 					  ref: 'cov_area' 

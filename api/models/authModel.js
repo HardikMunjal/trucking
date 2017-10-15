@@ -13,9 +13,9 @@ var cModel = {
     User.find({email:data.email,password:data.password})
     .populate(
       { path: 'team_ids' , populate: [
-      { path: 'role_ids', populate : {path : 'role_id'} , select: { "role_id": 1, "right_code": 1} },
+      { path: 'role_right_ids.rol_right', populate : {path : 'role_id'} , select: { "role_id": 1, "right_code": 1} },
       { path: 'covArea_ids', select: { "name": 1, "code": 1} }
-      ], select: { "name": 1, "role_ids": 1 ,"covArea_ids":1} }
+      ] }
       )
     .exec(function(err, result){
 
