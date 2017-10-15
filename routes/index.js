@@ -8,6 +8,7 @@ var roleCtlr = require('../api/controllers/roleController');
 var rightCtlr = require('../api/controllers/rightController');
 var areaCtlr = require('../api/controllers/coveringAreaController');
 var teamCtlr = require('../api/controllers/teamController');
+var orderCtlr = require('../api/controllers/orderController');
 var roleRightCtlr = require('../api/controllers/roleRightController');
 var xlsxj = require("xlsx-to-json");
 
@@ -100,5 +101,8 @@ module.exports = function (app) {
      app.post('/trk/area', areaCtlr.createNewCoveringArea);
      app.post('/trk/area/:coveringArea_id', areaCtlr.updateCoveringArea);
      app.delete('/trk/area/:coveringArea_id',areaCtlr.deleteCoveringArea);
+
+
+     app.get('/trk/order', orderCtlr.fetchAllOrder);
 
 }
