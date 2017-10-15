@@ -23,6 +23,10 @@ var orderSchema = new Schema({
 		type:String,
 		default:null
 	},
+	product_id:{
+		type:String,
+		default:null
+	},
 	client_name:{
 		type:String,
 		default:null

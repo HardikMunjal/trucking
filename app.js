@@ -105,6 +105,8 @@ app.set('view engine', 'html');
 
                 orderB.order_num=order.pedido;
                 orderB.client_name=order.cliente;
+                orderB.client_id=order.coc_cli;
+                orderB.product_id=order.producto;
                 orderB.qty= order.cantidad;
                 bulkOrders.push(orderB);
                 orderB={};
