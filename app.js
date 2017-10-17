@@ -61,11 +61,13 @@ app.set('view engine', 'html');
                         }
                         callback(null, true);
                     }
-                }).single('file');
+                }).any();
+
+    var fileHandler;
     /** API path that will upload the files */
     app.post('/upload', function(req, res) {
 
-        console.log('number of files',req.file)
+        console.log('number of files',req.files)
         var exceltojson;
         upload(req,res,function(err){
             if(err){
@@ -73,15 +75,18 @@ app.set('view engine', 'html');
                  res.json({error_code:101,err_desc:err});
                  return;
             }
+
+            fileHandler=req.files[0];
             /** Multer gives us file info in req.file object */
-            if(!req.file){
+
+            if(!fileHandler){
                 res.json({error_code:1,err_desc:"No file passed"});
                 return;
             }
             /** Check the extension of the incoming file and 
              *  use the appropriate module
              */
-            if(req.file.originalname.split('.')[req.file.originalname.split('.').length-1] === 'xlsx'){
+            if(fileHandler.originalname.split('.')[fileHandler.originalname.split('.').length-1] === 'xlsx'){
                 exceltojson = xlsxtojson;
             } else {
                 exceltojson = xlstojson;
@@ -90,7 +95,7 @@ app.set('view engine', 'html');
              
          
             exceltojson({
-                    input: req.file.path, //the same path where we uploaded our file
+                    input: fileHandler.path, //the same path where we uploaded our file
                     output: null, //since we don't need output.json
                     lowerCaseHeaders:true,
             sheet: "YOBEL_SCM"
