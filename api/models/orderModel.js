@@ -31,8 +31,10 @@ var oModel = {
                return cb(null,mongooseDocuments);
           })
           .catch(function(err) {
+
               return cb(err);
-              /* Error handling */
+
+
           });
       // var json = data.load;
       // var load = new Load(json)

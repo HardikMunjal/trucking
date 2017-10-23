@@ -100,6 +100,8 @@ app.set('view engine', 'html');
                     output: null, //since we don't need output.json
                     lowerCaseHeaders:true,
                     sheet: "YOBEL_SCM"
+
+
             
           }, function(err, result) {
             if(err) {
@@ -115,7 +117,11 @@ app.set('view engine', 'html');
                 orderB.client_id=order.coc_cli;
                 orderB.product_id=order.producto;
                 orderB.qty= order.cantidad;
-                bulkOrders.push(orderB);
+
+                if(orderB.order_num && orderB.product_id){
+                  bulkOrders.push(orderB);
+                }
+                
                 orderB={};
               });
               var data ={};
@@ -127,8 +133,13 @@ app.set('view engine', 'html');
                     console.log(result)
                     return res.json("Orders added successfully");
                   }else{
+<<<<<<< Updated upstream
+=======
+                    console.log(err);
+>>>>>>> Stashed changes
                     return res.json(err);
                   }
+
                 })
               //res.json(bulkOrders);
             }

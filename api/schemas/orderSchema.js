@@ -33,7 +33,9 @@ var orderSchema = new Schema({
 	},
 	order_num:{
 		type:String,
-		default:null
+		default:null,
+		required: true,
+		index: { unique: true }
 	},
 	qty:{
         type: String,
