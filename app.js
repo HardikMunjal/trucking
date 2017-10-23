@@ -133,10 +133,6 @@ app.set('view engine', 'html');
                     console.log(result)
                     return res.json("Orders added successfully");
                   }else{
-<<<<<<< Updated upstream
-=======
-                    console.log(err);
->>>>>>> Stashed changes
                     return res.json(err);
                   }
 
