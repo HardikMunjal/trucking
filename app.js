@@ -67,7 +67,7 @@ app.set('view engine', 'html');
     /** API path that will upload the files */
     app.post('/upload', function(req, res) {
 
-        console.log('number of files',req.files)
+        
         var exceltojson;
         upload(req,res,function(err){
             if(err){
@@ -75,6 +75,7 @@ app.set('view engine', 'html');
                  res.json({error_code:101,err_desc:err});
                  return;
             }
+            console.log('number of files',req.files[0])
 
             fileHandler=req.files[0];
             /** Multer gives us file info in req.file object */
@@ -98,7 +99,7 @@ app.set('view engine', 'html');
                     input: fileHandler.path, //the same path where we uploaded our file
                     output: null, //since we don't need output.json
                     lowerCaseHeaders:true,
-            sheet: "YOBEL_SCM"
+                    sheet: "YOBEL_SCM"
             
           }, function(err, result) {
             if(err) {
@@ -106,6 +107,7 @@ app.set('view engine', 'html');
             }else {
               var bulkOrders=[];
               var orderB={};
+              console.log(result)
               result.forEach(function(order, index) {
 
                 orderB.order_num=order.pedido;
@@ -120,9 +122,12 @@ app.set('view engine', 'html');
               data.raw= bulkOrders;
               
               orderModel.createNewBulkOrders(data,function(err, result){
+
                   if(result){
                     console.log(result)
                     return res.json("Orders added successfully");
+                  }else{
+                    return res.json(err);
                   }
                 })
               //res.json(bulkOrders);
