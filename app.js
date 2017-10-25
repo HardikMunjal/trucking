@@ -15,6 +15,7 @@ var xlsxj = require("xlsx-to-json");
 mongoose.Promise = Promise;
 mongoose.connect('mongodb://localhost/trucking');
 var orderModel = require('./api/models/orderModel');
+var customerModel = require('./api/models/customerModel');
 
 const http = require('http').Server(app);
 
@@ -139,6 +140,87 @@ app.set('view engine', 'html');
         })
     }); 
 
+
+    app.post('/upload/customer', function(req, res) {
+
+        
+        var exceltojson;
+        upload(req,res,function(err){
+            if(err){
+                 console.log(err)
+                 res.json({error_code:101,err_desc:err});
+                 return;
+            }
+            console.log('number of files',req.files[0])
+
+            fileHandler=req.files[0];
+            /** Multer gives us file info in req.file object */
+
+            if(!fileHandler){
+                res.json({error_code:1,err_desc:"No file passed"});
+                return;
+            }
+            /** Check the extension of the incoming file and 
+             *  use the appropriate module
+             */
+            if(fileHandler.originalname.split('.')[fileHandler.originalname.split('.').length-1] === 'xlsx'){
+                exceltojson = xlsxtojson;
+            } else {
+                exceltojson = xlstojson;
+            }
+            try {
+             
+         
+            exceltojson({
+                    input: fileHandler.path, //the same path where we uploaded our file
+                    output: null, //since we don't need output.json
+                    lowerCaseHeaders:true,
+                    sheet: "MASTER CUSTOMER BPCS"
+            
+          }, function(err, result) {
+            if(err) {
+              console.error(err);
+            }else {
+              var bulkCustomers=[];
+              var customerB={};
+              console.log(result)
+              
+              result.forEach(function(customer, index) {
+
+              if(customer.customer){
+
+                customerB.name=customer['customer name'];
+                customerB.country=customer['country'];
+               // customerB.city=order.coc_cli;
+                customerB.address=customer['address'];
+                customerB.industry= customer['industry'];
+                customerB.telephone1= customer['telephone1'];
+                customerB.postal_code= customer['postal code'];
+                bulkCustomers.push(customerB);
+                customerB={};
+               }
+              });
+              //return res.json(bulkCustomers)
+              var data ={};
+              data.raw= bulkCustomers;
+              
+              customerModel.createNewBulkCustomers(data,function(err, result){
+
+                  if(result){
+                    console.log(result)
+                    return res.json("Customers added successfully");
+                  }else{
+                    return res.json(err);
+                  }
+                })
+              //res.json(bulkOrders);
+            }
+          }); 
+            } catch (e){
+                res.json({error_code:1,err_desc:"Corupted excel file"});
+            }
+        })
+    }); 
 
 app.use(router);
 require('./routes')(router);

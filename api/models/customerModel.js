@@ -122,6 +122,25 @@ var cModel = {
         // we have deleted the user
         return cb(null,result);
       });
+    },
+
+    createNewBulkCustomers: function(data,cb){
+
+      var rawDocuments = data.raw;
+
+      Customer.insertMany(rawDocuments)
+          .then(function(mongooseDocuments) {
+               return cb(null,mongooseDocuments);
+          })
+          .catch(function(err) {
+              return cb(err);
+              /* Error handling */
+          });
+      // var json = data.load;
+      // var load = new Load(json)
+      // load.save(function(err, result){
+      //       return cb(null,result);
+      // })
     }
   };
 
