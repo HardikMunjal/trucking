@@ -104,5 +104,9 @@ module.exports = function (app) {
 
 
      app.get('/trk/order', orderCtlr.fetchAllOrder);
+     app.get('/trk/order/:order_id', orderCtlr.fetchOrder);
+     app.post('/trk/order', orderCtlr.createNewOrder);
+     app.post('/trk/order/:order_id', orderCtlr.updateOrder);
+     app.delete('/trk/order/:order_id',orderCtlr.deleteOrder);
 
 }
