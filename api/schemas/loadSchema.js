@@ -29,6 +29,10 @@ var loadSchema = new Schema({
 	createdAt:{
 		type:Date,
 		default:Date.now
+	},
+	created_by:{
+		type:String,
+		default:null
 	}
 });
 

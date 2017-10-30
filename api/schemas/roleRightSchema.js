@@ -24,6 +24,10 @@ var roleRightSchema = new Schema({
 	updatedAt:{
 		type:Date,
 		default:Date.now
+	},
+	created_by:{
+		type:String,
+		default:null
 	}
 });
 

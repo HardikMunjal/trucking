@@ -28,7 +28,11 @@ var userCustomerSchema = new Schema({
 	createdAt:{
 		type:Date,
 		default:Date.now
-	}
+	},
+    created_by:{
+        type:String,
+        default:null
+    }
 });
 //here user-customer, from which collection name will be defined
 var userCustomer = mongoose.model('user-customer', userCustomerSchema);
