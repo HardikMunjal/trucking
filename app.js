@@ -67,7 +67,7 @@ app.set('view engine', 'html');
 
     var fileHandler;
     /** API path that will upload the files */
-    app.post('/upload/nn', function(req, res) {
+    app.post('/upload', function(req, res) {
 
         
         var exceltojson;
@@ -230,7 +230,7 @@ app.set('view engine', 'html');
         })
     }); 
 
-     app.post('/upload', function(req, res) {
+     app.post('/upload/user', function(req, res) {
 
         
         var exceltojson;
@@ -240,9 +240,9 @@ app.set('view engine', 'html');
                  res.json({error_code:101,err_desc:err});
                  return;
             }
-            console.log('number of files',req.file)
+            console.log('number of files',req.files[0])
 
-            fileHandler=req.file;
+            fileHandler=req.files[0];
             /** Multer gives us file info in req.file object */
 
             if(!fileHandler){
