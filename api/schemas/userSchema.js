@@ -9,6 +9,17 @@ var mongoose = require('mongoose'),
 var team_u = require('./teamSchema');
 
 var UserSchema = new Schema({
+    
+    user_id: { 
+        type: String,
+        default:null
+        //, required: true, index: { unique: true } 
+    },
+    fullname: { 
+        type: String,
+        default:null
+        //, required: true, index: { unique: true } 
+    },
     username: { 
     	type: String,
         default:null

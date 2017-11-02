@@ -82,6 +82,23 @@ var cModel = {
         // we have deleted the user
         return cb(null,result);
       });
+    },
+
+    createNewBulkUsers: function(data,cb){
+
+      var rawDocuments = data.raw;
+
+      User.insertMany(rawDocuments)
+          .then(function(mongooseDocuments) {
+               return cb(null,mongooseDocuments);
+          })
+          .catch(function(err) {
+
+              return cb(err);
+
+
+          });
+    
     }
   };
 

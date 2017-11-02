@@ -16,6 +16,7 @@ mongoose.Promise = Promise;
 mongoose.connect('mongodb://localhost/trucking');
 var orderModel = require('./api/models/orderModel');
 var customerModel = require('./api/models/customerModel');
+var userModel = require('./api/models/userModel');
 
 const http = require('http').Server(app);
 
@@ -62,11 +63,11 @@ app.set('view engine', 'html');
                         }
                         callback(null, true);
                     }
-                }).any();
+                }).single('file');
 
     var fileHandler;
     /** API path that will upload the files */
-    app.post('/upload', function(req, res) {
+    app.post('/upload/nn', function(req, res) {
 
         
         var exceltojson;
@@ -228,6 +229,91 @@ app.set('view engine', 'html');
             }
         })
     }); 
+
+     app.post('/upload', function(req, res) {
+
+        
+        var exceltojson;
+        upload(req,res,function(err){
+            if(err){
+                 console.log(err)
+                 res.json({error_code:101,err_desc:err});
+                 return;
+            }
+            console.log('number of files',req.file)
+
+            fileHandler=req.file;
+            /** Multer gives us file info in req.file object */
+
+            if(!fileHandler){
+                res.json({error_code:1,err_desc:"No file passed"});
+                return;
+            }
+            /** Check the extension of the incoming file and 
+             *  use the appropriate module
+             */
+            if(fileHandler.originalname.split('.')[fileHandler.originalname.split('.').length-1] === 'xlsx'){
+                exceltojson = xlsxtojson;
+            } else {
+                exceltojson = xlstojson;
+            }
+            try {
+             
+         
+            exceltojson({
+                    input: fileHandler.path, //the same path where we uploaded our file
+                    output: null, //since we don't need output.json
+                    lowerCaseHeaders:true,
+                    sheet: "Clientes Retail"
+            
+          }, function(err, result) {
+            if(err) {
+              console.error(err);
+            }else {
+              var bulkUsers=[];
+              var userB={};
+              console.log(result)
+             // return res.json(result)
+              
+              result.forEach(function(user, index) {
+
+              if(user.cod_consultora){
+
+                userB.fullname=user['nombre'];
+                userB.password='exo#123';
+               // customerB.city=order.coc_cli;
+                userB.user_id=user['cod_consultora'];
+                userB.industry= user['industry'];
+                userB.telephones= [{"number": "4",
+                "type": "mobile"}];
+                userB.email= user['cod_consultora']+'exo.com';
+                userB.telephones[0].number=user['telefono'];
+                bulkUsers.push(userB);
+                userB={};
+               }
+              });
+              //return res.json(bulkCustomers)
+              var data ={};
+              data.raw= bulkUsers;
+              
+              userModel.createNewBulkUsers(data,function(err, result){
+
+                  if(result){
+                    console.log(result)
+                    return res.json("Users added successfully");
+                  }else{
+                    return res.json(err);
+                  }
+                })
+              //res.json(bulkOrders);
+            }
+          }); 
+            } catch (e){
+                res.json({error_code:1,err_desc:"Corupted excel file"});
+            }
+        })
+    }); 
+
 
 app.use(router);
 require('./routes')(router);
