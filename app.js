@@ -63,7 +63,7 @@ app.set('view engine', 'html');
                         }
                         callback(null, true);
                     }
-                }).single('file');
+                }).any();
 
     var fileHandler;
     /** API path that will upload the files */
@@ -71,13 +71,18 @@ app.set('view engine', 'html');
 
         
         var exceltojson;
+        var imported_filename;
         upload(req,res,function(err){
             if(err){
                  console.log(err)
                  res.json({error_code:101,err_desc:err});
                  return;
             }
-            console.log('number of files',req.files[0])
+            console.log('number of files',req.files[0]);
+
+            imported_filename = req.files[0].originalname;
+
+
 
             fileHandler=req.files[0];
             /** Multer gives us file info in req.file object */
@@ -119,6 +124,7 @@ app.set('view engine', 'html');
                 orderB.client_id=order.coc_cli;
                 orderB.product_id=order.producto;
                 orderB.qty= order.cantidad;
+                orderB.imported_filename = imported_filename;
 
                 if(orderB.order_num && orderB.product_id){
                   bulkOrders.push(orderB);

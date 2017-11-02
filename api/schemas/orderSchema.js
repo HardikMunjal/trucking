@@ -37,6 +37,10 @@ var orderSchema = new Schema({
 		required: true,
 		index: { unique: true }
 	},
+	imported_filename:{
+        type: String,
+		default:null
+	},
 	qty:{
         type: String,
 		default:null
